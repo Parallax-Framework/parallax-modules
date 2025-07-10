@@ -12,9 +12,9 @@
 local MODULE = MODULE
 
 function MODULE:CalcView(client, pos, ang, fov)
-    if ( !ax.Cinematic.Active ) then return end
+    if ( !ax.cinematic.Active ) then return end
 
-    local camPos, camAng, camFov = ax.Cinematic:GetValue()
+    local camPos, camAng, camFov = ax.cinematic:GetValue()
     if ( !camPos ) then return end
 
     return {
@@ -28,9 +28,9 @@ end
 local offsetVector = Vector()
 
 function MODULE:PostDrawTranslucentRenderables()
-    if ( !ax.Cinematic.Debug ) then return end
+    if ( !ax.cinematic.Debug ) then return end
 
-    for id, path in pairs(ax.Cinematic.RenderPaths) do
+    for id, path in pairs(ax.cinematic.RenderPaths) do
         for i = 2, #path do
             local prev = path[i - 1]
             local node = path[i]
@@ -42,7 +42,7 @@ function MODULE:PostDrawTranslucentRenderables()
             local last = points[1]
             for j = 1, 60 do
                 local t = j / 60
-                local pos = ax.Cinematic:Bezier(points, t)
+                local pos = ax.cinematic:Bezier(points, t)
 
                 -- Layered line thickness by offsetting
                 for offset = -1, 1 do

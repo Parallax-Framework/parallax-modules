@@ -11,21 +11,21 @@
 
 --- Cinematic
 -- Clientside Bézier-based camera system using keyframes and timestamped playback.
--- @module ax.Cinematic
+-- @module ax.cinematic
 
-ax.Cinematic = ax.Cinematic or {}
-ax.Cinematic.Active = nil
-ax.Cinematic.Path = {}
-ax.Cinematic.TotalDistance = 0
-ax.Cinematic.StartTime = 0
-ax.Cinematic.Duration = 0
-ax.Cinematic.Debug = true
-ax.Cinematic.RenderPaths = {}
+ax.cinematic = ax.cinematic or {}
+ax.cinematic.Active = nil
+ax.cinematic.Path = {}
+ax.cinematic.TotalDistance = 0
+ax.cinematic.StartTime = 0
+ax.cinematic.Duration = 0
+ax.cinematic.Debug = true
+ax.cinematic.RenderPaths = {}
 
 --- Starts a new cinematic path.
 -- @param duration Playback duration
 -- @param path Table of {pos, ang, [fov], [ctrl]} entries
-function ax.Cinematic:Start(duration, path)
+function ax.cinematic:Start(duration, path)
     self:Stop()
 
     self.Path = {}
@@ -82,7 +82,7 @@ function ax.Cinematic:Start(duration, path)
 end
 
 --- Stops the current cinematic.
-function ax.Cinematic:Stop()
+function ax.cinematic:Stop()
     self.Path = {}
     self.TotalDistance = 0
     self.StartTime = 0
@@ -94,7 +94,7 @@ end
 --- Cubic Bézier curve calculator.
 -- @param points Table of 4 control points
 -- @param t Normalized progress
-function ax.Cinematic:Bezier(points, t)
+function ax.cinematic:Bezier(points, t)
     local u = 1 - t
     local tt = t * t
     local uu = u * u
@@ -107,7 +107,7 @@ function ax.Cinematic:Bezier(points, t)
         ttt * points[4]
 end
 
-function ax.Cinematic:GetValue()
+function ax.cinematic:GetValue()
     local elapsed = CurTime() - self.StartTime
     if elapsed >= self.Duration then self:Stop() return end
 
@@ -229,7 +229,7 @@ local path = {
 }
 
 concommand.Add("ax_cinematic_example", function()
-    ax.Cinematic:Start(#path * 4, path)
+    ax.cinematic:Start(#path * 4, path)
 end)
 
 -- Prints a point with the current eye pos, angle and fov, used for adding new points
