@@ -23,3 +23,9 @@ ax.localisation:Register("es-ES", {
     ["config.permakill.enabled.help"] = "Cuando está habilitado, los personajes de los jugadores serán asesinados permanentemente al morir, impidiendo la reaparición.",
     ["config.permakill"] = "Muerte Permanente",
 })
+
+ax.localisation:Register("bg", {
+    ["config.permakill.enabled"] = "Активиране на Перманентна Смърт",
+    ["config.permakill.enabled.help"] = "Когато е активирано, персонажите на играчите ще бъдат перманентно убити при смърт, предотвратявайки възкресение.",
+    ["config.permakill"] = "Перманентна Смърт",
+})
