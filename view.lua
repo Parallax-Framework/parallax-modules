@@ -294,6 +294,7 @@ if ( CLIENT ) then
     function MODULE:CalcView(client, origin, angles, fov, znear, zfar)
         if ( !ax.option:Get("view") ) then return end
         if ( !IsValid(client) or client:InObserver() or !client:Alive() ) then return end
+        if ( hook.Run("PreRenderThirdpersonView", client, origin, angles, fov) == true ) then return end
 
         local view = {
             origin = origin,
